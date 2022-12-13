@@ -1,6 +1,6 @@
 appName: javan-app
 appImage: 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/maven-app
-appVersion: version
+appVersion: tag
 serviceType: NodePort
 appReplicas: 1
 containerPort: 8080

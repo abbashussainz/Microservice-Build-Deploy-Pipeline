@@ -69,16 +69,14 @@ pipeline{
                 sh "helm package HELM-CHART "
                 sh "helm push helm-repo-0.1.0.tgz oci://266454083192.dkr.ecr.ap-northeast-1.amazonaws.com "
             }
-        }
+        }    
+    }
 
-
-        post{ 
+     post{ 
             success { 
                 build job: 'Deploy pipeline', parameters: [
                     string(name: 'BUILD_NUMBER', value: "${env.BUILD_NUMBER}")
                 ]
             }
-        }
-        
     }
 }

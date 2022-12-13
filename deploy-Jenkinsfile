@@ -14,7 +14,16 @@ pipeline{
         stage("Pulling helm chart from ECR "){
             steps{
                 sh 'helm pull oci://266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/helm-repo --version 0.1.0 '
-                sh "ls"
+            }
+        }
+
+        stage("deploying helm in EKS"){
+            environment{
+                AWS_ACCESS_KEY_ID = credentials("aws_access_key_id")
+                AWS_SECRET_ACCESS_KEY = credentials("aws_secret_key")
+            }
+            steps{
+                sh 'kubectl get nodes'
             }
         }
     }

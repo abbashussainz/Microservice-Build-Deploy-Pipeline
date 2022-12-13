@@ -4,9 +4,20 @@ pipeline{
 
     stages{
         stage("hi"){
-        steps{
-            echo "hi"
+            steps{
+                stage("Logging into Helm repository "){
+                    steps{
+                        sh 'aws ecr get-login-password --region ap-northeast-1 | helm registry login --username AWS --password-stdin 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com'
+                    }
+                }
+            }
         }
+
+        stage("Logging into Helm repository "){
+            steps{
+                sh 'helm chart pull 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/helm-repo:0.1.0'
+                sh "ls"
+            }
         }
     }
 }

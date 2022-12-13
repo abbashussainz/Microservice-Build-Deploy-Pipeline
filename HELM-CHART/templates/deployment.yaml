@@ -17,6 +17,6 @@ spec:
         image: "{{ .Values.appImage}}:{{ .Values.appVersion}}"
         ports: 
         - containerPort: {{ .Values.containerPort }}
-        resourse:
+        resources:
           requests:
             cpu: "100m"

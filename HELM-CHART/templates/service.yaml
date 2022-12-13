@@ -10,3 +10,4 @@ spec:
   - protocol: TCP 
     port: {{ .Values.servicePort }}
     targetPort: {{ .Values.containerPort }}
+    

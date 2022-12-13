@@ -71,10 +71,10 @@ pipeline{
             }
         }
 
-        stage ('Invoke_pipelineA') {
+        stage ('Invoke net pipeline') {
             steps {
-                build job: 'pipelineA', parameters: [
-                string(name: 'param1', value: "value1")
+                build job: 'Deploy pipeline', parameters: [
+                string(name: 'BUILD_NUMBER', value: "${env.BUILD_NUMBER}")
                 ]
             }
         }

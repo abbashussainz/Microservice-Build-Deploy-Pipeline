@@ -56,9 +56,11 @@ pipeline{
             }
         }
 
-        stage("Update  image tag in helm value file"){
+        stage("Update image tag in helm value file"){
             steps{
-                sh "sed  -i's/version/$BUILD_NUMBER' HELM-CHART\values.yaml "
+                sh "cd HELM-CHARTS"
+                sh "sed  -i 's/version/$BUILD_NUMBER' values.yaml "
+                sh "cat values.yaml"
             }
         }
         

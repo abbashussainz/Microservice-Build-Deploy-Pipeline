@@ -22,5 +22,18 @@ pipeline{
               }
             }
         }
+
+        stage("Maven Packaging"){
+          steps{
+           sh 'mvn package'
+          }
+        }
+
+        stage("Build Image") {
+          steps{
+           sh 'docker build -t java-maven-app:${env.BUILD_NUMBER} .'
+           sh 'docker images list'
+          }
+         }
     }
 }

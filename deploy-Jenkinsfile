@@ -13,7 +13,7 @@ pipeline{
 
         stage("Pulling helm chart from ECR "){
             steps{
-                sh 'helm pull 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/helm-repo:0.1.0'
+                sh 'helm pull oci://266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/helm-repo --version 0.1.0 '
                 sh "ls"
             }
         }

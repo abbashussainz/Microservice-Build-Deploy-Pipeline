@@ -31,8 +31,7 @@ pipeline{
 
         stage("Build Image") {
           steps{
-           sh 'docker build -t java-maven-app:${env.BUILD_NUMBER} .'
-           sh 'docker images list'
+           sh 'docker build -t java-maven-app:$BUILD_NUMBER .'
           }
          }
     }

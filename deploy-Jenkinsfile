@@ -19,12 +19,11 @@ pipeline{
 
         stage('K8S Deploy') {
             steps{   
-                script{
-                    withKubeConfig([credentialsId: 'K8S', serverUrl: '']) {
-                    sh ('kubectl get nodes')
-                    }
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'K8S', namespace: '', serverUrl: '') {
+                    sh "kubectl get nodes"
                 }
             }
+
         }
     }
 }

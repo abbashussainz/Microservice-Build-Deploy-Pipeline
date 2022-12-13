@@ -48,7 +48,19 @@ pipeline{
                 sh 'docker tag java-maven-app:$BUILD_NUMBER 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/maven-app:$BUILD_NUMBER'
                 sh 'docker push 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/maven-app:$BUILD_NUMBER'
             }
-         }
+        }
+        
+        stage("Logging into Helm repository "){
+            steps{
+                sh 'aws ecr get-login-password --region ap-northeast-1 | helm registry login --username AWS --password-stdin 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com'
+            }
+        }
+
+        stage("Update  image tag in helm value file"){
+            steps{
+                sh "sed  -i's/version/$BUILD_NUMBER' HELM-CHART\values.yaml "
+            }
+        }
         
     }
 }

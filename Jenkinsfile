@@ -72,7 +72,7 @@ pipeline{
         }
 
 
-        post { 
+        post{ 
             success { 
                 build job: 'Deploy pipeline', parameters: [
                     string(name: 'BUILD_NUMBER', value: "${env.BUILD_NUMBER}")

@@ -30,9 +30,29 @@ pipeline{
         }
 
         stage("Build Image") {
-          steps{
-           sh 'docker build -t java-maven-app:$BUILD_NUMBER .'
-          }
+            steps{
+                sh 'docker build -t java-maven-app:$BUILD_NUMBER .'
+            }
+        }
+
+        stage("Logging Into ECR"){
+            steps{
+                sh 'aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com'
+            } 
+        }
+
+        stage("Logging Into ECR"){
+            steps{
+                sh 'aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com'
+            } 
+        }
+
+        stage("Pushing Image To ECR"){
+            steps{
+                sh 'docker tag java-maven-app:$BUILD_NUMBER 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/maven-app:$BUILD_NUMBER'
+                sh 'docker push 266454083192.dkr.ecr.ap-northeast-1.amazonaws.com/maven-app:$BUILD_NUMBER'
+            }
          }
+        
     }
 }

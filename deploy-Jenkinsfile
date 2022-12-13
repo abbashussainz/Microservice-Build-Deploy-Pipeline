@@ -17,13 +17,13 @@ pipeline{
             }
         }
 
-        stage("deploying helm in EKS"){
-            environment{
-                AWS_ACCESS_KEY_ID = credentials("aws_access_key_id")
-                AWS_SECRET_ACCESS_KEY = credentials("aws_secret_key")
-            }
-            steps{
-                sh 'kubectl version'
+        stage('K8S Deploy') {
+            steps{   
+                script{
+                    withKubeConfig([credentialsId: 'K8S', serverUrl: '']) {
+                    sh ('kubectl get nodes')
+                    }
+                }
             }
         }
     }
